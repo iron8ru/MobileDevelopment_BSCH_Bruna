@@ -4,10 +4,13 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -34,7 +37,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
@@ -361,4 +366,59 @@ fun DividerTextComponent() {
 
     }
 }
+
+
+@Composable
+fun TextWithShadow(value: String,
+                   textSize: TextUnit,
+                   textAlign: TextAlign?,
+                   modifier: Modifier = Modifier,
+                   colorValue: Color = Color.White){
+    val shadowOffset = Offset(x= 1f, y=2f)
+    Text(
+        text = value,
+        color = colorValue,
+        fontSize = textSize,
+
+        style = TextStyle(
+            shadow = Shadow(color = colorValue, shadowOffset, 2f)
+        ),
+        fontWeight = FontWeight.Light,
+    )
+
+}
+@Composable
+fun AdviseComposable( value1: String, value2: String, image: Int){ // make background color a parameter too
+    Card( modifier = Modifier
+        .padding(25.dp)
+        .fillMaxWidth()
+        .fillMaxHeight(),
+        shape =RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(4.dp),
+        colors = CardDefaults.cardColors(Color.DarkGray)
+    ){
+        Column (
+            modifier = Modifier.padding(18.dp,24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ){
+            Image(painter = painterResource(id = R.drawable.bulb), contentDescription = "quoteImage", alignment = Alignment.Center)
+            Spacer(modifier = Modifier.size(45.dp))
+            TextWithShadow(value = value1, 30.sp, textAlign = TextAlign.Center)
+            Spacer(modifier = Modifier.size(80.dp))
+            TextWithShadow(value = value2, 20.sp, textAlign = TextAlign.Center)
+            Spacer(modifier = Modifier.size(80.dp))
+            Image(painter = painterResource(id = image), contentDescription = "quoteImage", alignment = Alignment.Center)
+
+        }
+
+    }
+}
+
+@Preview
+@Composable
+fun AdviseComposablePreview(){
+    AdviseComposable("TEST", "another test", image = R.drawable.cat3_reduce)
+}
+
 
