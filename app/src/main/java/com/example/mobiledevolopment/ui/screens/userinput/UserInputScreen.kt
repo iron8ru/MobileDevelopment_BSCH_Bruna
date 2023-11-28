@@ -1,4 +1,4 @@
-package com.example.mobiledevolopment.screens
+package com.example.mobiledevolopment.ui.screens.userinput
 
 
 import androidx.compose.foundation.layout.Column
@@ -11,20 +11,20 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.mobiledevolopment.Components.ActivityCard
-import com.example.mobiledevolopment.Components.ButtonComponent
-import com.example.mobiledevolopment.Components.TextComponent
-import com.example.mobiledevolopment.Components.TextFieldComponent
-import com.example.mobiledevolopment.Components.TopBar
+import com.example.mobiledevolopment.ui.screens.theme.ActivityCard
+import com.example.mobiledevolopment.ui.screens.theme.ButtonComponent
+import com.example.mobiledevolopment.ui.screens.theme.TextComponent
+import com.example.mobiledevolopment.ui.screens.theme.TextFieldComponent
+import com.example.mobiledevolopment.ui.screens.theme.TopBar
 import com.example.mobiledevolopment.R
-import com.example.mobiledevolopment.ViewModel.UserInputViewModel
 import com.example.mobiledevolopment.data.UserDataUiEvents
-
+import com.example.mobiledevolopment.navigation.ActivityType
 
 @Composable
-fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: (Pair<String, String?>) -> Unit) {
+fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: (Pair<String, ActivityType>) -> Unit) {
 
     Surface(
         modifier = Modifier.fillMaxSize()
@@ -35,14 +35,14 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
                 .padding(18.dp)
         )
         {
-            TopBar("Hi There")
-            TextComponent(textValue = "How are you today?", textSize = 24.sp)
+            TopBar(stringResource(R.string.hi_there))
+            TextComponent(textValue = stringResource(R.string.how_are_you_today), textSize = 24.sp)
             Spacer(modifier = Modifier.size(20.dp))
-            TextFieldComponent("First Name", onTextChanged = {
+            TextFieldComponent(stringResource(R.string.type_in_your_first_name), onTextChanged = {
                 userInputViewModel.onEvent(UserDataUiEvents.UserNameEntered(it))
             })
             Spacer(modifier = Modifier.size(30.dp))
-            TextComponent(textValue = "What activity you wish to do?", textSize = 20.sp)
+            TextComponent(textValue = stringResource(R.string.what_activity_you_wish_to_do), textSize = 20.sp)
             Spacer(modifier = Modifier.size(40.dp))
 
             //Displaying two columns side by side
@@ -50,26 +50,26 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
                 // First Column
                 Column {
                     TextComponent(
-                        textValue = "Read a Book?",
+                        textValue = stringResource(R.string.read_a_book),
                         textSize = 18.sp,
                         paddingStart = 24.dp
                     )
                     ActivityCard(image = R.drawable.readbook150, cardSelected = {
                         userInputViewModel.onEvent(
-                            UserDataUiEvents.CardSelected(it)
+                            UserDataUiEvents.ActivitySelected(it)
                         )
-                    }, selected = userInputViewModel.uiState.value.cardSelected == "Book")
+                    }, selected = userInputViewModel.uiState.value.activitySelected == ActivityType.READ)
                     TextComponent(
-                        textValue = "Look for my Cat?",
+                        textValue = stringResource(R.string.look_for_my_cat),
                         textSize = 18.sp,
                         paddingStart = 24.dp
                     )
                     ActivityCard(image = R.drawable.findcat150, cardSelected = {
                         userInputViewModel.onEvent(
-                            UserDataUiEvents.CardSelected(it)
+                            UserDataUiEvents.ActivitySelected(activityType = it)
                         )
 
-                    }, selected = userInputViewModel.uiState.value.cardSelected == "Cat")
+                    }, selected = userInputViewModel.uiState.value.activitySelected == ActivityType.CAT)
                 }
 
                 // Add spacing between columns if needed
@@ -78,25 +78,25 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
                 // Second Column
                 Column {
                     TextComponent(
-                        textValue = "Take a Nap?",
+                        textValue = stringResource(R.string.take_a_nap),
                         textSize = 18.sp,
                         paddingStart = 24.dp
                     )
                     ActivityCard(image = R.drawable.gonap150, cardSelected = {
                         userInputViewModel.onEvent(
-                            UserDataUiEvents.CardSelected(it)
+                            UserDataUiEvents.ActivitySelected(it)
                         )
-                    }, selected = userInputViewModel.uiState.value.cardSelected == "Nap")
+                    }, selected = userInputViewModel.uiState.value.activitySelected == ActivityType.NAP)
                     TextComponent(
-                        textValue = "Look at the Stars?",
+                        textValue = stringResource(R.string.look_at_the_stars),
                         textSize = 18.sp,
                         paddingStart = 24.dp
                     )
                     ActivityCard(image = R.drawable.stars300, cardSelected = {
                         userInputViewModel.onEvent(
-                            UserDataUiEvents.CardSelected(it)
+                            UserDataUiEvents.ActivitySelected(it)
                         )
-                    }, selected = userInputViewModel.uiState.value.cardSelected == "Stars")
+                    }, selected = userInputViewModel.uiState.value.activitySelected == ActivityType.STARS)
                 }
 
             }
@@ -104,12 +104,10 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
             if (userInputViewModel.isValidState()) {
                 ButtonComponent(
                     goToAdviseScreen = {
-                        println("=====coming here")
-                        println("======${userInputViewModel.uiState.value.nameEntered}")
                         showMeAdviseScreen(
                             Pair(
                                 userInputViewModel.uiState.value.nameEntered,
-                                userInputViewModel.uiState.value.cardSelected
+                                userInputViewModel.uiState.value.activitySelected
                             )
                         )
                     }

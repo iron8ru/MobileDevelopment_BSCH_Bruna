@@ -1,6 +1,7 @@
-package com.example.mobiledevolopment.screens
+package com.example.mobiledevolopment.navigation
 
 object Routes {
+
     const val USER_INPUT_SCREEN = "USER_INPUT_SCREEN"
     const val ADVISE_SCREEN = "ADVISE_SCREEN"
     const val SIGN_UP_SCREEN = "SING_UP"

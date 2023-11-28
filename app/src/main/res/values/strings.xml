@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">MobileDevolopment</string>
+    <string name="app_name">My Application</string>
+    <string name="welcome">Welcome!</string>
+    <string name="forgot_your_password_reset">Forgot your Password? Reset</string>
+    <string name="login">Login</string>
+    <string name="doesn_t_have_an_account_sign_up">Doesn\'t have an account? Sign Up</string>
+    <string name="username_and_password_are_not_matching">Username and password are not matching</string>
+    <string name="login_successfully">Login Successfully</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="by_clicking_here_i_accept_terms_and_conditions">By clicking here I accept terms and conditions</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="failed_to_register_your_email">Failed to register your email: %1$s</string>
+    <string name="registered_successfully">Registered Successfully</string>
+    <string name="hi_there">Hi There</string>
+    <string name="how_are_you_today">How are you today?</string>
+    <string name="look_at_the_stars">Look at the Stars?</string>
+    <string name="type_in_your_first_name">Type in your First Name</string>
+    <string name="what_activity_you_wish_to_do">What activity you wish to do?</string>
+    <string name="read_a_book">Read a Book?</string>
+    <string name="look_for_my_cat">Look for my Cat?</string>
+    <string name="take_a_nap">Take a Nap?</string>
 </resources>

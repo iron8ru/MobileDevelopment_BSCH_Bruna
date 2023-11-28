@@ -1,4 +1,4 @@
-package com.example.mobiledevolopment.Components
+package com.example.mobiledevolopment.ui.screens.theme
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobiledevolopment.R
+import com.example.mobiledevolopment.navigation.ActivityType
 import com.example.mobiledevolopment.theme.BgColor
 import com.example.mobiledevolopment.theme.Primary
 import com.example.mobiledevolopment.theme.componentShapes
@@ -104,9 +105,11 @@ fun TextComponent(
         fontSize = textSize,
         color = colorValue,
         fontWeight = FontWeight.Light,
-        modifier = Modifier.padding(paddingValues = PaddingValues(start = paddingStart)).clickable {
-            onTextClicked()
-        }
+        modifier = Modifier
+            .padding(paddingValues = PaddingValues(start = paddingStart))
+            .clickable {
+                onTextClicked()
+            }
     )
 
 }
@@ -215,14 +218,11 @@ fun PasswordTextFieldComponent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginTextFieldComponent(
-    labelValue: String, painterResource: Painter
-
+    labelValue: String, painterResource: Painter,
+    onTextChanged: (name: String) -> Unit
 ) {
-    val textValue = remember {
-        mutableStateOf("")
-    }
+    val textValue = remember { mutableStateOf("") }
 
-    val localFocusManager = LocalFocusManager.current
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth()
@@ -239,6 +239,7 @@ fun LoginTextFieldComponent(
         value = textValue.value,
         onValueChange = {
             textValue.value = it
+            onTextChanged(it)
         },
         leadingIcon = {
             Icon(painter = painterResource, contentDescription = "")
@@ -248,7 +249,7 @@ fun LoginTextFieldComponent(
 }
 
 @Composable
-fun CheckboxComponent(value: String) {
+fun CheckboxComponent(value: String, onCheckBoxChanged: (Boolean) ->Unit) {
 
     Row(
         modifier = Modifier
@@ -262,7 +263,8 @@ fun CheckboxComponent(value: String) {
         }
 
         Checkbox(checked = checkedState.value, onCheckedChange = {
-            !checkedState.value
+            checkedState.value = !checkedState.value
+            onCheckBoxChanged(checkedState.value)
         })
 
         TextComponent(textValue = value, textSize = 15.sp)
@@ -272,7 +274,7 @@ fun CheckboxComponent(value: String) {
 }
 
 @Composable
-fun ActivityCard(image: Int, selected: Boolean, cardSelected: (cardName: String) -> Unit) {
+fun ActivityCard(image: Int, selected: Boolean, cardSelected: (activityType: ActivityType) -> Unit) {
 
     val localFocusManager = LocalFocusManager.current
 
@@ -292,11 +294,11 @@ fun ActivityCard(image: Int, selected: Boolean, cardSelected: (cardName: String)
                 )
                 .clickable {
                     val cardName = when (image) {
-                        R.drawable.readbook150 -> "Book"
-                        R.drawable.findcat150 -> "Cat"
-                        R.drawable.gonap150 -> "Nap"
-                        R.drawable.stars300 -> "Stars"
-                        else -> "Unknown"
+                        R.drawable.readbook150 -> ActivityType.READ
+                        R.drawable.findcat150 -> ActivityType.CAT
+                        R.drawable.gonap150 -> ActivityType.NAP
+                        R.drawable.stars300 -> ActivityType.STARS
+                        else -> {ActivityType.UNKNOWN}
                     }
                     cardSelected(cardName)
                     localFocusManager.clearFocus()
@@ -335,7 +337,7 @@ fun RegisterButtonComponent(
         onClick = {
             onClickListener()
         }) {
-        TextComponent(value, textSize = 18.sp, colorValue = Color.White)
+        Text(text = value, color = Color.White, fontSize = 18.sp)
     }
 }
 
@@ -367,7 +369,6 @@ fun DividerTextComponent() {
     }
 }
 
-
 @Composable
 fun TextWithShadow(value: String,
                    textSize: TextUnit,
@@ -388,14 +389,20 @@ fun TextWithShadow(value: String,
 
 }
 @Composable
-fun AdviseComposable( value1: String, value2: String, image: Int){ // make background color a parameter too
+fun AdviseComposable(
+    roomLight: String,
+    lightAction: String,
+    image: Int,
+    cardBackground: Color,
+    textColor: Color
+){ // make background color a parameter too
     Card( modifier = Modifier
         .padding(25.dp)
         .fillMaxWidth()
         .fillMaxHeight(),
         shape =RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp),
-        colors = CardDefaults.cardColors(Color.DarkGray)
+        colors = CardDefaults.cardColors(cardBackground)
     ){
         Column (
             modifier = Modifier.padding(18.dp,24.dp),
@@ -404,9 +411,9 @@ fun AdviseComposable( value1: String, value2: String, image: Int){ // make backg
         ){
             Image(painter = painterResource(id = R.drawable.bulb), contentDescription = "quoteImage", alignment = Alignment.Center)
             Spacer(modifier = Modifier.size(45.dp))
-            TextWithShadow(value = value1, 30.sp, textAlign = TextAlign.Center)
+            TextWithShadow(value = roomLight, 30.sp, textAlign = TextAlign.Center, colorValue = textColor)
             Spacer(modifier = Modifier.size(80.dp))
-            TextWithShadow(value = value2, 20.sp, textAlign = TextAlign.Center)
+            TextWithShadow(value = lightAction, 20.sp, textAlign = TextAlign.Center, colorValue = textColor)
             Spacer(modifier = Modifier.size(80.dp))
             Image(painter = painterResource(id = image), contentDescription = "quoteImage", alignment = Alignment.Center)
 
@@ -418,7 +425,13 @@ fun AdviseComposable( value1: String, value2: String, image: Int){ // make backg
 @Preview
 @Composable
 fun AdviseComposablePreview(){
-    AdviseComposable("TEST", "another test", image = R.drawable.cat3_reduce)
+    AdviseComposable(
+        "TEST",
+        "another test",
+        image = R.drawable.cat3_reduce,
+        cardBackground = Color.DarkGray,
+        textColor = Color.White
+    )
 }
 
 

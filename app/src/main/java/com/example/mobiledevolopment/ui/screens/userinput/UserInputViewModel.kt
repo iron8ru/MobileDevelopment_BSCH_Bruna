@@ -1,9 +1,10 @@
-package com.example.mobiledevolopment.ViewModel
+package com.example.mobiledevolopment.ui.screens.userinput
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.mobiledevolopment.data.UserDataUiEvents
 import com.example.mobiledevolopment.data.UserInputScreenState
+import com.example.mobiledevolopment.navigation.ActivityType
 
 class UserInputViewModel : ViewModel() {
     var uiState = mutableStateOf(UserInputScreenState())
@@ -17,16 +18,18 @@ class UserInputViewModel : ViewModel() {
 
             }
 
-            is UserDataUiEvents.CardSelected -> {
+            is UserDataUiEvents.ActivitySelected -> {
                 uiState.value = uiState.value.copy(
-                    cardSelected = event.cardValue
+                    activitySelected = event.activityType
                 )
             }
         }
     }
 
     fun isValidState(): Boolean {
-        return !uiState.value.nameEntered.isNullOrEmpty() &&
-                !uiState.value.cardSelected.isNullOrEmpty()
+        return uiState.value.nameEntered.isNotEmpty() &&
+                uiState.value.activitySelected != ActivityType.UNKNOWN
     }
 }
+
+
