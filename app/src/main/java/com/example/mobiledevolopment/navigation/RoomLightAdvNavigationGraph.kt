@@ -42,10 +42,10 @@ fun RoomLightAdvNavigationGraph(userInputViewModel: UserInputViewModel = viewMod
         }
 
         composable("${Routes.ADVISE_SCREEN}/{${Routes.USER_NAME}}/{${Routes.CARD_SELECTED}}",
-            arguments = listOf(
-                navArgument(name = Routes.USER_NAME){ type =NavType.StringType},
-                navArgument(name = Routes.CARD_SELECTED){ type = NavType.EnumType(ActivityType::class.java)}
-            )) {
+        arguments = listOf(
+            navArgument(name = Routes.USER_NAME){ type =NavType.StringType},
+            navArgument(name = Routes.CARD_SELECTED){ type = NavType.EnumType(ActivityType::class.java)}
+        )) {
             val username = it.arguments?.getString(Routes.USER_NAME)
             val cardSelected = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 it.arguments?.getParcelable(Routes.CARD_SELECTED, ActivityType::class.java)

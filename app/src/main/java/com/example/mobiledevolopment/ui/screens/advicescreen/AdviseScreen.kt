@@ -18,7 +18,6 @@ import com.example.mobiledevolopment.ui.screens.theme.TextWithShadow
 import com.example.mobiledevolopment.R
 import com.example.mobiledevolopment.navigation.ActivityType
 import androidx.lifecycle.viewmodel.compose.viewModel
-
 @Composable
 fun AdviseScreen(
     nameEntered: String?,
@@ -37,17 +36,16 @@ fun AdviseScreen(
 
         ) {
             val isDark = viewModel.isDark
-            val roomLightText = if (isDark) "dark" else "bright"
-            val lightActionText = if (isDark) "On" else "Off"
             val cardBackground = if(isDark) Color.DarkGray else Color.Yellow
             val textColor = if(isDark) Color.White else Color.Black
-            val activityText = when(activityType) {
-                ActivityType.READ -> "read a book"
-                ActivityType.NAP -> "a nap"
-                ActivityType.CAT -> "find your cat"
-                ActivityType.STARS -> "looking at stars"
+            val activityImage = when(activityType) {
+                ActivityType.READ -> R.drawable.readbook_b
+                ActivityType.NAP -> R.drawable.gonap_b
+                ActivityType.CAT -> R.drawable.cat3_reduce
+                ActivityType.STARS -> R.drawable.stars_b
                 ActivityType.UNKNOWN -> "unknown activity"
             }
+
             Spacer(modifier = Modifier.size(20.dp))
             TextWithShadow(
                 value = "Thanks for asking, $nameEntered!",
@@ -57,9 +55,9 @@ fun AdviseScreen(
             )
             Spacer(modifier = Modifier.size(30.dp))
             AdviseComposable(
-                roomLight = "The room is too $roomLightText for $activityText!",
-                lightAction = "Consider turning $lightActionText the lights!",
-                image = R.drawable.cat3_reduce,
+                roomLight = viewModel.getProperMessage(activityType),
+                lightAction = viewModel.getRoomLightStatus(activityType).second,
+                image = activityImage as Int,
                 cardBackground = cardBackground,
                 textColor = textColor
             )
@@ -75,3 +73,4 @@ fun AdviseScreen(
 fun AdviseScreenPreview() {
     AdviseScreen(nameEntered = "username", activityType = ActivityType.UNKNOWN)
 }
+

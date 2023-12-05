@@ -30,33 +30,3 @@ class MainActivity : ComponentActivity() {
 
 
 }
-//
-//@AndroidEntryPoint
-//class MainActivity : ComponentActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContent {
-//            SensorGuideTheme {
-//                val viewModel = viewModel<MainViewModel>()
-//                val isDark = viewModel.isDark
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .background(
-//                            if (isDark) Color.DarkGray else Color.White
-//                        ),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Text(
-//                        text = if(isDark) {
-//                            "It's dark outside"
-//                        } else {
-//                            "It's bright outside"
-//                        },
-//                        color = if(isDark) Color.White else Color.DarkGray
-//                    )
-//                }
-//            }
-//        }
-//    }
-//}

@@ -388,6 +388,7 @@ fun TextWithShadow(value: String,
     )
 
 }
+
 @Composable
 fun AdviseComposable(
     roomLight: String,
