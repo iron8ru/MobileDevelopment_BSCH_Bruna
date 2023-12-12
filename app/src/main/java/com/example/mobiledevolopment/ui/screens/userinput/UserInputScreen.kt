@@ -82,7 +82,7 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
                         textSize = 18.sp,
                         paddingStart = 24.dp
                     )
-                    ActivityCard(image = R.drawable.gonap150, cardSelected = {
+                    ActivityCard(image = R.drawable.nap, cardSelected = {
                         userInputViewModel.onEvent(
                             UserDataUiEvents.ActivitySelected(it)
                         )

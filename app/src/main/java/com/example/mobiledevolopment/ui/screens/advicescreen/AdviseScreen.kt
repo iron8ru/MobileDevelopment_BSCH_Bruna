@@ -36,7 +36,11 @@ fun AdviseScreen(
 
         ) {
             val isDark = viewModel.isDark
-            val cardBackground = if(isDark) Color.DarkGray else Color.Yellow
+            val darkGrayColor = Color(0xFFA8A9AD)
+            val yellowColor = Color(0xFFD4AF37)
+            val cardBackground = if (isDark) darkGrayColor else yellowColor
+
+
             val textColor = if(isDark) Color.White else Color.Black
             val activityImage = when(activityType) {
                 ActivityType.READ -> R.drawable.readbook_b
@@ -50,8 +54,8 @@ fun AdviseScreen(
             TextWithShadow(
                 value = "Thanks for asking, $nameEntered!",
                 25.sp,
-                textAlign = TextAlign.Center,
-                colorValue = if (isDark) Color.White else Color.Black
+                textAlign = TextAlign.Center
+
             )
             Spacer(modifier = Modifier.size(30.dp))
             AdviseComposable(

@@ -77,7 +77,7 @@ fun TopBar(value: String) {
         Spacer(modifier = Modifier.weight(1f))
 
         Image(
-            painter = painterResource(id = R.drawable.bulb),
+            painter = painterResource(id = R.drawable.bulb2),
             contentDescription = "lamp Bulb",
 
             )
@@ -289,14 +289,14 @@ fun ActivityCard(image: Int, selected: Boolean, cardSelected: (activityType: Act
                 .fillMaxSize()
                 .border(
                     width = 1.dp,
-                    color = if (selected) Color.Green else Color.Transparent,
+                    color = if (selected) Color.Blue else Color.Transparent,
                     shape = RoundedCornerShape(15.dp)
                 )
                 .clickable {
                     val cardName = when (image) {
                         R.drawable.readbook150 -> ActivityType.READ
                         R.drawable.findcat150 -> ActivityType.CAT
-                        R.drawable.gonap150 -> ActivityType.NAP
+                        R.drawable.nap -> ActivityType.NAP
                         R.drawable.stars300 -> ActivityType.STARS
                         else -> {ActivityType.UNKNOWN}
                     }
@@ -374,13 +374,14 @@ fun TextWithShadow(value: String,
                    textSize: TextUnit,
                    textAlign: TextAlign?,
                    modifier: Modifier = Modifier,
-                   colorValue: Color = Color.White){
+                   colorValue: Color = Color.Black){
     val shadowOffset = Offset(x= 1f, y=2f)
     Text(
         text = value,
         color = colorValue,
         fontSize = textSize,
-
+        textAlign = textAlign ?: TextAlign.Start,
+        modifier = modifier,
         style = TextStyle(
             shadow = Shadow(color = colorValue, shadowOffset, 2f)
         ),
@@ -410,7 +411,7 @@ fun AdviseComposable(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ){
-            Image(painter = painterResource(id = R.drawable.bulb), contentDescription = "quoteImage", alignment = Alignment.Center)
+            Image(painter = painterResource(id = R.drawable.bulb2), contentDescription = "quoteImage", alignment = Alignment.Center)
             Spacer(modifier = Modifier.size(45.dp))
             TextWithShadow(value = roomLight, 30.sp, textAlign = TextAlign.Center, colorValue = textColor)
             Spacer(modifier = Modifier.size(80.dp))

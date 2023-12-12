@@ -15,10 +15,10 @@
     <string name="failed_to_register_your_email">Failed to register your email: %1$s</string>
     <string name="registered_successfully">Registered Successfully</string>
     <string name="hi_there">Hi There</string>
-    <string name="how_are_you_today">How are you today?</string>
+    <string name="how_are_you_today">How are you?</string>
     <string name="look_at_the_stars">Look at the Stars?</string>
     <string name="type_in_your_first_name">Type in your First Name</string>
-    <string name="what_activity_you_wish_to_do">What activity you wish to do?</string>
+    <string name="what_activity_you_wish_to_do">Choose the activity you wish to do:</string>
     <string name="read_a_book">Read a Book?</string>
     <string name="look_for_my_cat">Look for my Cat?</string>
     <string name="take_a_nap">Take a Nap?</string>

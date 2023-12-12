@@ -34,15 +34,15 @@ class AdviseViewModel constructor(application: Application): AndroidViewModel(ap
         return when(activityType) {
             ActivityType.READ, ActivityType.CAT -> {
                 return if(isDark) {
-                    "too dark" to "consider turing on the lights"
+                    "too dark" to "Consider turing on the lights!!"
                 } else
-                    "Perfect" to "Enjoy"
+                    "perfect" to "Enjoy it!"
             }
             ActivityType.NAP, ActivityType.STARS -> {
                 return if(isDark) {
-                    "Perfect" to "Enjoy"
+                    "Perfect" to "Enjoy it!"
                 } else {
-                    "too bright" to "consider turning off the lights"
+                    "too bright" to "Consider turning off the lights!!"
                 }
             }
             else -> { "" to "" }
@@ -51,10 +51,10 @@ class AdviseViewModel constructor(application: Application): AndroidViewModel(ap
 
     private fun getActivityChosen(activityType: ActivityType): String {
         return when(activityType) {
-            ActivityType.READ -> "read a book"
-            ActivityType.NAP -> "take a nap"
-            ActivityType.CAT -> "look for your cat"
-            ActivityType.STARS -> "look at the stars"
+            ActivityType.READ -> "reading a book!"
+            ActivityType.NAP -> "taking a nap!"
+            ActivityType.CAT -> "looking for your cat!"
+            ActivityType.STARS -> "looking at the stars!"
             ActivityType.UNKNOWN -> ""
         }
     }
