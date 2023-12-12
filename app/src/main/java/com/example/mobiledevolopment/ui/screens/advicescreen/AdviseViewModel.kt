@@ -7,11 +7,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import com.example.mobiledevolopment.navigation.ActivityType
 import com.example.mobiledevolopment.sensor_data.LightSensor
-
+// ViewModel responsible for providing advice based on the ambient light conditions and the type of activity.
 class AdviseViewModel constructor(application: Application): AndroidViewModel(application) {
+    // LightSensor instance to detect ambient light levels.
     val lightSensor = LightSensor(context = application.applicationContext)
+    // State variable to track whether the environment is considered dark.
     var isDark by mutableStateOf(false)
 
+    // Initialization block: Start listening to the light sensor and set up the callback for value changes.
     init {
         lightSensor.startListening()
         lightSensor.setOnSensorValuesChangedListener { values ->
@@ -20,6 +23,7 @@ class AdviseViewModel constructor(application: Application): AndroidViewModel(ap
         }
     }
 
+    // Function to generate an advice message based on the activity type.
     fun getProperMessage(activityType: ActivityType): String {
         val builder = StringBuilder()
         builder.append("The room light is ")
@@ -30,6 +34,7 @@ class AdviseViewModel constructor(application: Application): AndroidViewModel(ap
     }
 
 
+    // Function to determine the room light status and provide appropriate advice.
     fun getRoomLightStatus(activityType: ActivityType): Pair<String, String> {
         return when(activityType) {
             ActivityType.READ, ActivityType.CAT -> {
@@ -49,6 +54,7 @@ class AdviseViewModel constructor(application: Application): AndroidViewModel(ap
         }
     }
 
+    // Function to provide a descriptive string for the chosen activity type.
     private fun getActivityChosen(activityType: ActivityType): String {
         return when(activityType) {
             ActivityType.READ -> "reading a book!"
