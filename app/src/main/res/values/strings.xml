@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">RoomLight
+    </string>
     <string name="welcome">Welcome!</string>
     <string name="forgot_your_password_reset">Forgot your Password? Reset</string>
     <string name="login">Login</string>
