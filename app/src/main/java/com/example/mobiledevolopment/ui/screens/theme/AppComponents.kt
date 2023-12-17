@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -63,7 +64,9 @@ import com.example.mobiledevolopment.theme.componentShapes
 
 
 @Composable
+// Custom top bar component with a title and an image
 fun TopBar(value: String) {
+
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
@@ -92,6 +95,7 @@ fun TopBarPreview() {
 }
 
 @Composable
+// Reusable component for displaying text with optional click behavior
 fun TextComponent(
     textValue: String,
     textSize: TextUnit,
@@ -138,6 +142,7 @@ fun TextComponentPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+//text field for general input
 fun TextFieldComponent(
     labelValue: String, onTextChanged: (name: String) -> Unit
 ) {
@@ -182,6 +187,7 @@ fun TextFieldComponent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+// i ended up not using this function
 fun PasswordTextFieldComponent(
     labelValue: String, painterResource: Painter
 ) {
@@ -217,6 +223,7 @@ fun PasswordTextFieldComponent(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+// text field for the log in
 fun LoginTextFieldComponent(
     labelValue: String, painterResource: Painter,
     onTextChanged: (name: String) -> Unit
@@ -249,6 +256,7 @@ fun LoginTextFieldComponent(
 }
 
 @Composable
+//component for checkbox with text
 fun CheckboxComponent(value: String, onCheckBoxChanged: (Boolean) ->Unit) {
 
     Row(
@@ -274,16 +282,18 @@ fun CheckboxComponent(value: String, onCheckBoxChanged: (Boolean) ->Unit) {
 }
 
 @Composable
+// Card component for displaying an activity with an image, supporting selection
 fun ActivityCard(image: Int, selected: Boolean, cardSelected: (activityType: ActivityType) -> Unit) {
-
+    //focus manager
     val localFocusManager = LocalFocusManager.current
-
+    // Card with specified styling and behavior
     Card(
         modifier = Modifier
             .padding(24.dp)
             .size(130.dp),
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
+        // Box to support selection behavior
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -293,12 +303,15 @@ fun ActivityCard(image: Int, selected: Boolean, cardSelected: (activityType: Act
                     shape = RoundedCornerShape(15.dp)
                 )
                 .clickable {
+                    // Identify the activity type based on the provided image
                     val cardName = when (image) {
                         R.drawable.readbook150 -> ActivityType.READ
                         R.drawable.findcat150 -> ActivityType.CAT
                         R.drawable.nap -> ActivityType.NAP
                         R.drawable.stars300 -> ActivityType.STARS
-                        else -> {ActivityType.UNKNOWN}
+                        else -> {
+                            ActivityType.UNKNOWN
+                        }
                     }
                     cardSelected(cardName)
                     localFocusManager.clearFocus()
@@ -315,6 +328,7 @@ fun ActivityCard(image: Int, selected: Boolean, cardSelected: (activityType: Act
 }
 
 @Composable
+//normal but6ton component
 fun ButtonComponent(
     goToAdviseScreen: () -> Unit
 ) {
@@ -323,7 +337,7 @@ fun ButtonComponent(
         onClick = {
             goToAdviseScreen()
         }) {
-        TextComponent(textValue = "Advise me", textSize = 18.sp, colorValue = Color.White)
+        TextComponent(textValue = stringResource(R.string.advise_me), textSize = 18.sp, colorValue = Color.White)
     }
 }
 
@@ -342,6 +356,7 @@ fun RegisterButtonComponent(
 }
 
 @Composable
+//ui divider with line and string
 fun DividerTextComponent() {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -356,7 +371,7 @@ fun DividerTextComponent() {
         )
 
 
-        Text(text = "or", modifier = Modifier.padding(8.dp), fontSize = 18.sp)
+        Text(text = stringResource(R.string.or), modifier = Modifier.padding(8.dp), fontSize = 18.sp)
 
         Divider(
             modifier = Modifier
@@ -370,6 +385,7 @@ fun DividerTextComponent() {
 }
 
 @Composable
+//text component with shadow
 fun TextWithShadow(value: String,
                    textSize: TextUnit,
                    textAlign: TextAlign?,
@@ -391,6 +407,7 @@ fun TextWithShadow(value: String,
 }
 
 @Composable
+// component for the advise card/logic
 fun AdviseComposable(
     roomLight: String,
     lightAction: String,

@@ -26,6 +26,7 @@ import com.example.mobiledevolopment.navigation.ActivityType
 @Composable
 fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: (Pair<String, ActivityType>) -> Unit) {
 
+    // main layout of the UserInputScreen
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -72,7 +73,7 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
                     }, selected = userInputViewModel.uiState.value.activitySelected == ActivityType.CAT)
                 }
 
-                // Add spacing between columns if needed
+                // Add spacing between columns
                 Spacer(modifier = Modifier.width(20.dp))
 
                 // Second Column
@@ -101,6 +102,7 @@ fun UserInPutScreen(userInputViewModel: UserInputViewModel, showMeAdviseScreen: 
 
             }
             Spacer(modifier = Modifier.weight(1f))
+            // Display a button if the user input is considered valid
             if (userInputViewModel.isValidState()) {
                 ButtonComponent(
                     goToAdviseScreen = {

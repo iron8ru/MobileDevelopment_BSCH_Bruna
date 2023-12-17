@@ -45,6 +45,7 @@ fun SignInScreen(navController: NavHostController, viewModel: AuthenticationView
     val uiState = viewModel.uiState.collectAsState()
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    // Main layout of the sign-in screen
     Surface(
         color = Color.White,
         modifier = Modifier
@@ -61,13 +62,14 @@ fun SignInScreen(navController: NavHostController, viewModel: AuthenticationView
             Spacer(modifier = Modifier.height(20.dp))
             HeadingTextComponent(stringResource(R.string.welcome))
             Spacer(modifier = Modifier.size(20.dp))
+            // Input field for the username
             LoginTextFieldComponent(
                 "Username",
                 painterResource(id = R.drawable.profile), onTextChanged = {
                     email = it
                 }
             )
-
+            // Input field for the password
             LoginTextFieldComponent(
                 "Password",
                 painterResource(id = R.drawable.password), onTextChanged = {
@@ -87,6 +89,7 @@ fun SignInScreen(navController: NavHostController, viewModel: AuthenticationView
             Spacer(modifier = Modifier.height(20.dp))
             DividerTextComponent()
             Spacer(modifier = Modifier.height(20.dp))
+            // Display a link for user registration
             TextComponent(stringResource(R.string.doesn_t_have_an_account_sign_up), textSize = 18.sp,  paddingStart = 20.dp, onTextClicked = {
                 navController.navigate(Routes.SIGN_UP_SCREEN){
                     popUpTo(Routes.SIGN_IN_SCREEN){
@@ -98,14 +101,17 @@ fun SignInScreen(navController: NavHostController, viewModel: AuthenticationView
         }
     }
 
+    //toasts and loading indicators
     when (uiState.value) {
         is Resource.Error -> {
+            // Display a toast for authentication error
             Toast.makeText(context,
                 stringResource(R.string.username_and_password_are_not_matching), Toast.LENGTH_SHORT)
                 .show()
         }
 
         is Resource.Loading -> {
+            // Display a loading indicator
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -121,6 +127,7 @@ fun SignInScreen(navController: NavHostController, viewModel: AuthenticationView
         }
 
         is Resource.Success -> {
+            // Display a success toast and navigate to the next screen
             Toast.makeText(context, stringResource(R.string.login_successfully), Toast.LENGTH_SHORT).show()
             navController.navigate(Routes.USER_INPUT_SCREEN)
         }

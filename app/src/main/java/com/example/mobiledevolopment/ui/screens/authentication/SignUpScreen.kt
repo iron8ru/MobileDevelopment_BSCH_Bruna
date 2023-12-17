@@ -46,6 +46,7 @@ fun SignUpScreen(navController: NavHostController, viewModel: AuthenticationView
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var terms by remember { mutableStateOf(false) }
+    //main layout for the SignUpScreen
     Surface(
         color = Color.White,
         modifier = Modifier
@@ -62,6 +63,7 @@ fun SignUpScreen(navController: NavHostController, viewModel: AuthenticationView
             Spacer(modifier = Modifier.size(20.dp))
             HeadingTextComponent(stringResource(R.string.create_an_account))
             Spacer(modifier = Modifier.size(20.dp))
+            // input field for email
             LoginTextFieldComponent(
                 stringResource(R.string.email),
                 painterResource(id = R.drawable.email),
@@ -69,6 +71,7 @@ fun SignUpScreen(navController: NavHostController, viewModel: AuthenticationView
                     email = it
                 }
             )
+            // input field for password
             LoginTextFieldComponent(
                 stringResource(R.string.password),
                 painterResource(id = R.drawable.password), onTextChanged = {
@@ -123,6 +126,7 @@ fun SignUpScreen(navController: NavHostController, viewModel: AuthenticationView
 
         }
     }
+    //toasts and loading indicators
     when (uiState.value) {
         is Resource.Error -> {
             Toast.makeText(context,

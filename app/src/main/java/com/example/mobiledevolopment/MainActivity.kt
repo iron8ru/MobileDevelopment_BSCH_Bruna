@@ -13,9 +13,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+        // Install splash screen
         installSplashScreen()
+        //Set the content of the activity using Jetpack Compose
         setContent {
             MyApplicationTheme {
+                // Call the RoomLightAdvApp composable function to set up the app UI
                 RoomLightAdvApp()
 
             }
@@ -24,6 +27,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun RoomLightAdvApp(){
+        // Call the RoomLightAdvNavigationGraph composable function to define app navigation
         RoomLightAdvNavigationGraph()
 
     }

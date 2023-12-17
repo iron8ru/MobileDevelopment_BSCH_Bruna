@@ -25,6 +25,8 @@ fun AdviseScreen(
     viewModel: AdviseViewModel = viewModel()
 ) {
 
+
+    //layout of the AdviseScreen
     Surface(
         modifier = Modifier.fillMaxSize()
 
@@ -35,13 +37,17 @@ fun AdviseScreen(
                 .padding(18.dp)
 
         ) {
+            //// Determine colors based on whether the theme is dark or light
             val isDark = viewModel.isDark
             val darkGrayColor = Color(0xFFA8A9AD)
             val yellowColor = Color(0xFFD4AF37)
             val cardBackground = if (isDark) darkGrayColor else yellowColor
 
 
+
+            //text color based on isDark
             val textColor = if(isDark) Color.White else Color.Black
+            // Determine the image associated with the selected activity type
             val activityImage = when(activityType) {
                 ActivityType.READ -> R.drawable.readbook_b
                 ActivityType.NAP -> R.drawable.gonap_b
@@ -58,6 +64,7 @@ fun AdviseScreen(
 
             )
             Spacer(modifier = Modifier.size(30.dp))
+            // Display advice and information using the AdviseComposable
             AdviseComposable(
                 roomLight = viewModel.getProperMessage(activityType),
                 lightAction = viewModel.getRoomLightStatus(activityType).second,

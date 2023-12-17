@@ -22,4 +22,6 @@
     <string name="read_a_book">Read a Book?</string>
     <string name="look_for_my_cat">Look for my Cat?</string>
     <string name="take_a_nap">Take a Nap?</string>
+    <string name="advise_me">Advise me</string>
+    <string name="or">or</string>
 </resources>
